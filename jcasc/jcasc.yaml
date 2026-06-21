@@ -1,0 +1,14 @@
+jenkins:
+
+systemMessage: "DevOps Lab Jenkins"
+
+numExecutors: 2
+
+securityRealm:
+local:
+allowsSignup: false
+
+authorizationStrategy:
+loggedInUsersCanDoAnything:
+allowAnonymousRead: false
+

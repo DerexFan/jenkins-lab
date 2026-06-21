@@ -1,0 +1,25 @@
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps {
+                sh 'docker build -t hello-app:latest .'
+            }
+        }
+
+        stage('Load Kind') {
+            steps {
+                sh 'kind load docker-image hello-app:latest --name akslab2'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'kubectl apply -f k8s/'
+            }
+        }
+    }
+}

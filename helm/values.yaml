@@ -1,0 +1,24 @@
+controller:
+
+  serviceAccount:
+    create: true
+
+  rbac:
+    create: true
+
+  initializeOnce: true
+
+  admin:
+    username: admin
+    password: admin123456
+
+  installPlugins:
+    - kubernetes
+    - git
+    - workflow-aggregator
+    - docker-workflow
+    - pipeline-stage-view
+
+persistence:
+  enabled: true
+  size: 10Gi
