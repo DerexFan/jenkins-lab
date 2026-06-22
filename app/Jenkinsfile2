@@ -19,6 +19,8 @@ stages {
     stage('Deploy') {
         steps {
             sh 'echo Deploy Success'
+	    sh 'kubectl exec -it myjenkins-0 -c jenkins -- bash'
+            sh 'kubectl get pods'
         }
     }
 }
