@@ -1,5 +1,33 @@
 controller:
 
+  JCasC:
+    configScripts:
+
+      kubernetes-cloud: |
+        jenkins:
+          clouds:
+            - kubernetes:
+                name: "kubernetes"
+
+                serverUrl: "https://kubernetes.default.svc"
+
+                namespace: "default"
+
+                jenkinsUrl: "http://myjenkins.default.svc.cluster.local:8080"
+
+                containerCapStr: "10"
+
+                templates:
+                  - name: "tools"
+                    namespace: "default"
+                    label: "tools"
+
+                    containers:
+                      - name: "tools"
+                        image: "busybox"
+                        command: "sleep"
+                        args: "99d"
+
   serviceAccount:
     create: true
 
@@ -18,6 +46,7 @@ controller:
     - workflow-aggregator
     - docker-workflow
     - pipeline-stage-view
+    - docker
 
 persistence:
   enabled: true

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+spec:
+  serviceAccountName: jenkins-agent
+  containers:
+  - name: tools
+    image: jenkins-devops-agent:v1
+    command:
+    - sleep
+    args:
+    - infinity
