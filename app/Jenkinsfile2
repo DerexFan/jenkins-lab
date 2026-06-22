@@ -1,31 +1,43 @@
 pipeline {
 
-agent any
+    agent {
 
-stages {
+        kubernetes {
 
-    stage('Checkout') {
-        steps {
-            checkout scm
+            yaml '''
+apiVersion: v1
+kind: Pod
+
+spec:
+
+  containers:
+
+  - name: tools
+
+    image: jenkins-agent-tools:v1
+
+    command:
+      - sleep
+
+    args:
+      - 99d
+'''
         }
     }
 
-    stage('Build') {
-        steps {
-            sh 'echo Build Success'
-        }
-    }
+    stages {
 
-    stage('Deploy') {
-        steps {
-            sh 'echo Deploy Success'
-            sh 'which docker'
-            sh 'which kubectl'
-	    sh 'kubectl exec -it myjenkins-0 -c jenkins -- bash'
-            sh 'kubectl get pods'
+        stage('Check') {
+
+            steps {
+
+                container('tools') {
+
+                    sh 'docker version'
+
+                    sh 'kubectl get pods'
+                }
+            }
         }
     }
 }
-
-}
-
